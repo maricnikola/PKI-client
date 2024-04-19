@@ -9,6 +9,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {Interceptor} from "./infrastructure/auth/interceptor";
 import {SharedService} from "./services/shared.service";
 import {LayoutModule} from "./layout/layout.module";
+import {CertificatesModule} from "./certificates/certificates.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {LayoutModule} from "./layout/layout.module";
     AppRoutingModule,
     AuthModule,
     HttpClientModule,
-    LayoutModule
+    LayoutModule,
+    CertificatesModule,
+    BrowserAnimationsModule
   ],
   providers: [DatePipe,
     {
