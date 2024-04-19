@@ -21,7 +21,7 @@ input {
   border-radius: 5px;
   width: 400px ;
   height: 45px;
-  padding: 10px;
+  padding: 5px;
   margin: 10px 0;
   filter: drop-shadow(6px 7px 7px rgba(0, 0, 0, 0.1));
 }
@@ -38,7 +38,7 @@ input {
   background-color: #235471;
   color: #FFFF;
   border-radius: 5px;
-  width: 400px;
+  width: 410px;
   padding: 10px;
   height: 45px;
   margin: 15px 0;
