@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CertificateRequestsComponent } from './certificate-requests/certificate-requests.component';
 import { CertificatesViewComponent } from './certificates-view/certificates-view.component';
+import {LayoutModule} from "../layout/layout.module";
 
 
 
@@ -10,8 +11,9 @@ import { CertificatesViewComponent } from './certificates-view/certificates-view
     CertificateRequestsComponent,
     CertificatesViewComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        LayoutModule
+    ]
 })
 export class CertificatesModule { }
