@@ -26,7 +26,7 @@ export class UnauthorizedGuard implements CanActivate {
     const userRole: string = this.authService.user$.getValue();
 
     if (userRole != null) {
-      this.router.navigate(['home']);
+      // this.router.navigate(['login']);
       return false;
     }
 
