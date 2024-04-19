@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LogInComponent} from "./infrastructure/auth/log-in/log-in.component";
 import {UnauthorizedGuard} from "./infrastructure/auth/guard/unauthorized.guard";
-import {HomeComponent} from "./layout/home/home.component";
+import {HomeComponent} from "./home/home/home.component";
 import {CertificatesViewComponent} from "./certificates/certificates-view/certificates-view.component";
 import {CertificateRequestsComponent} from "./certificates/certificate-requests/certificate-requests.component";
 

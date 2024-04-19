@@ -1,1 +1,21 @@
-<p>certificates-view works!</p>
+<div class="main-container">
+  <div class="main">
+    <div class="title">
+      <h3>Certificates</h3>
+    </div>
+    <div class="flex flex-column">
+      <div class="mb-3">
+        <button pButton type="button" label="Expand all" (click)="expandAll()"></button>
+        <button pButton type="button" label="Collapse all" (click)="collapseAll()"></button>
+      </div>
+      <p-tree [value]="files" selectionMode="checkbox" class="w-full md:w-30rem" [(selection)]="selectedFiles"></p-tree>
+    </div>
+<!--    <div class="mb-3">-->
+<!--      <button pButton type="button" label="Expand all" (click)="expandAll()" class="mr-2"></button>-->
+<!--      <button pButton type="button" label="Collapse all" (click)="collapseAll()"></button>-->
+<!--    </div>-->
+<!--    <div class="card flex flex-column align-items-center justify-content-center">-->
+<!--      <p-tree [value]="files" selectionMode="checkbox" class="w-full md:w-30rem" [(selection)]="selectedFiles"></p-tree>-->
+<!--    </div>-->
+  </div>
+</div>

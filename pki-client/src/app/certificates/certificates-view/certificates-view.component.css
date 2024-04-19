@@ -1,0 +1,28 @@
+.main {
+    background-color: #F6F8FA;
+    padding: 70px 150px 150px;
+    max-width: 1600px;
+    margin: auto;
+}
+.main-container{
+    background-color: #F6F8FA;
+}
+
+.title {
+    margin-bottom: 50px;
+}
+
+button {
+    margin-right: 10px;
+    border-radius: 5px;
+    background-color: #235471;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1a3e56;
+}
+

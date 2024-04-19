@@ -3,14 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {AuthModule} from "./infrastructure/auth/auth.module";
-import {DatePipe} from "@angular/common";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {Interceptor} from "./infrastructure/auth/interceptor";
-import {SharedService} from "./services/shared.service";
-import {LayoutModule} from "./layout/layout.module";
-import {CertificatesModule} from "./certificates/certificates.module";
+import { AuthModule } from "./infrastructure/auth/auth.module";
+import { DatePipe } from "@angular/common";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { Interceptor } from "./infrastructure/auth/interceptor";
+import { SharedService } from "./services/shared.service";
+import { LayoutModule } from "./layout/layout.module";
+import { CertificatesModule } from "./certificates/certificates.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeModule } from "./home/home.module";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     LayoutModule,
     CertificatesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HomeModule
   ],
   providers: [DatePipe,
     {
@@ -35,4 +37,5 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
