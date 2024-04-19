@@ -11,6 +11,7 @@ import {SharedService} from "./services/shared.service";
 import {LayoutModule} from "./layout/layout.module";
 import {CertificatesModule} from "./certificates/certificates.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HomeModule} from "./home/home.module";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     LayoutModule,
     CertificatesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HomeModule
   ],
   providers: [DatePipe,
     {

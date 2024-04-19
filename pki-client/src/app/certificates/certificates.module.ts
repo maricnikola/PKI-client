@@ -7,10 +7,13 @@ import {LayoutModule} from "../layout/layout.module";
 
 
 @NgModule({
-  declarations: [
-    CertificateRequestsComponent,
-    CertificatesViewComponent
-  ],
+    declarations: [
+        CertificateRequestsComponent,
+        CertificatesViewComponent
+    ],
+    exports: [
+        CertificatesViewComponent
+    ],
     imports: [
         CommonModule,
         LayoutModule
