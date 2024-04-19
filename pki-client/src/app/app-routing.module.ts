@@ -9,7 +9,8 @@ import {CertificateRequestsComponent} from "./certificates/certificate-requests/
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path: "login", component: LogInComponent},
-  {path: "home", component: HomeComponent}
+  {path: "home", component: HomeComponent},
+  {path: "certificate-requests", component: CertificateRequestsComponent}
 ];
 
 @NgModule({
