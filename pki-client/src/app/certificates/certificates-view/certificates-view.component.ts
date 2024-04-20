@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {PrimeIcons, TreeNode} from "primeng/api";
+import {Certificate} from "../models/certificate-request-model";
+import {MatTableDataSource} from "@angular/material/table";
+import {CertificatesService} from "../services/certificates.service";
+import {Tree} from "../models/tree-model";
 
 @Component({
   selector: 'app-certificates-view',
@@ -11,8 +15,7 @@ export class CertificatesViewComponent implements OnInit{
   files!: TreeNode[];
   selectedFiles!: any;
 
-  // constructor(private nodeService: NodeService) {}
-  constructor() {}
+  constructor(private certificatesService: CertificatesService) {}
   data = [
       {
         label: 'Folder 1',
@@ -67,7 +70,8 @@ export class CertificatesViewComponent implements OnInit{
 ];
   ngOnInit() {
     // this.nodeService.getFiles().then((data) => (this.files = data));
-    this.files = this.data;
+    // this.files = this.data;
+    this.getData();
   }
   expandAll() {
     this.files.forEach((node) => {
@@ -88,5 +92,14 @@ export class CertificatesViewComponent implements OnInit{
         this.expandRecursive(childNode, isExpand);
       });
     }
+  }
+
+  getData(): void {
+    this.certificatesService.getTree().subscribe({
+      next: (data: Tree[]) => {
+        console.log(data);
+      },
+      error: () => {console.log("Error!")}
+    })
   }
 }
