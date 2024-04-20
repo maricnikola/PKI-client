@@ -5,13 +5,19 @@ import { CertificatesViewComponent } from './certificates-view/certificates-view
 import {LayoutModule} from "../layout/layout.module";
 import {TreeModule} from "primeng/tree";
 import {ButtonModule} from "primeng/button";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatButtonModule} from "@angular/material/button";
+import { DeclineReasonPopupComponent } from './decline-reason-popup/decline-reason-popup.component';
+import {FormsModule} from "@angular/forms";
 
 
 
 @NgModule({
     declarations: [
         CertificateRequestsComponent,
-        CertificatesViewComponent
+        CertificatesViewComponent,
+        DeclineReasonPopupComponent
     ],
     exports: [
         CertificatesViewComponent
@@ -20,7 +26,11 @@ import {ButtonModule} from "primeng/button";
         CommonModule,
         LayoutModule,
         TreeModule,
-        ButtonModule
+        ButtonModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatButtonModule,
+        FormsModule
     ]
 })
 export class CertificatesModule { }

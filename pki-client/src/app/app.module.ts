@@ -12,6 +12,8 @@ import { LayoutModule } from "./layout/layout.module";
 import { CertificatesModule } from "./certificates/certificates.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from "./home/home.module";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MaterialModule} from "./infrastructure/material/material.module";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { HomeModule } from "./home/home.module";
     LayoutModule,
     CertificatesModule,
     BrowserAnimationsModule,
-    HomeModule
+    HomeModule,
+    MatPaginatorModule,
+    MaterialModule
   ],
   providers: [DatePipe,
     {
