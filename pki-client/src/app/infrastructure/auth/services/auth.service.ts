@@ -18,23 +18,23 @@ export class AuthService {
       'Content-Type': 'application/json',
       skip: 'true',
     });
-  
+
     user$ = new BehaviorSubject("");
     userState = this.user$.asObservable();
-  
+
     constructor() {
       this.user$.next(this.getRole());
     }
-  
+
     http = inject(HttpClient);
     login(auth: any): Observable<AuthResponse> {
-      return this.http.post<AuthResponse>(environment.apiHost + 'auth/login', auth, {
+      return this.http.post<AuthResponse>(environment.apiPki + 'auth/login', auth, {
         headers: this.headers,
       });
     }
-  
+
     logout(): Observable<string> {
-      return this.http.get(environment.apiHost + 'auth/logout', {
+      return this.http.get(environment.apiPki + 'auth/logout', {
         responseType: 'text',
       });
     }
@@ -47,27 +47,6 @@ export class AuthService {
       }
       return null;
     }
-    getId(): number{
-      if (this.isLoggedIn()) {
-        const accessToken: any = localStorage.getItem('user');
-        const helper = new JwtHelperService();
-        return helper.decodeToken(accessToken).id;
-      }
-      return 0;
-    }
-
-    getHostId(userId: number): Observable<number> {
-      return this.http.get<number>(environment.apiHost + 'users/host/' + userId);
-    }
-
-    getEmail(): string{
-      if (this.isLoggedIn()) {
-        const accessToken: any = localStorage.getItem('user');
-        const helper = new JwtHelperService();
-        return helper.decodeToken(accessToken).sub;
-      }
-      return "";
-    }
 
     isLoggedIn(): boolean {
       return localStorage.getItem('user') != null;
@@ -77,9 +56,4 @@ export class AuthService {
       this.user$.next(this.getRole());
     }
 
-    register(user: Registration): Observable<User> {
-      return this.http.post<User>(environment.apiHost + 'register', user, {
-        headers: this.headers,
-      });
-    }
   }
