@@ -27,6 +27,8 @@
           label="Add"
           class="custom-button add-button"
           (click)="add()"
+          [disabled]="selectedFile?.certificateType === CertificateType.END_ENTITY"
+          [ngClass]="{ 'disabled': selectedFile?.certificateType === CertificateType.END_ENTITY }"
         ></button>
         <button
           pButton
@@ -54,11 +56,13 @@
       <div class="details w-30" *ngIf="selectedFile">
         <div class="details-content">
           <div class="details-title">Details about certificate:</div>
-          <div class="field"><strong>commonName:</strong> {{ selectedFile?.commonName }}</div>
-          <div class="field"><strong>organization:</strong> {{ selectedFile?.organization }}</div>
-          <div class="field"><strong>email:</strong> {{ selectedFile?.email }}</div>
-          <div class="field"><strong>country:</strong> {{ selectedFile?.country }}</div>
-          <div class="field"><strong>certificateType:</strong> {{ selectedFile?.certificateType }}</div>
+          <div class="field"><strong>Common name:</strong> {{ selectedFile?.commonName }}</div>
+          <div class="field"><strong>Organization:</strong> {{ selectedFile?.organization }}</div>
+          <div class="field"><strong>Email:</strong> {{ selectedFile?.email }}</div>
+          <div class="field"><strong>Country:</strong> {{ selectedFile?.country }}</div>
+          <div class="field"><strong>Certificate type:</strong> {{ selectedFile?.certificateType }}</div>
+          <div class="field"><strong>Start date: </strong> {{ selectedFile?.startDate }}</div>
+          <div class="field"><strong>End data: </strong> {{ selectedFile?.endDate }}</div>
         </div>
       </div>
     </div>

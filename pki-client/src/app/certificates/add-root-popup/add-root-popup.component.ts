@@ -2,6 +2,13 @@ import {Component, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {CertificatesService} from "../services/certificates.service";
+import {
+  Certificate,
+  CertificateRequestStatus,
+  CertificateType,
+  Extensions,
+  KeyUsage
+} from "../models/certificate-request-model";
 
 @Component({
   selector: 'app-add-root-popup',
@@ -13,7 +20,7 @@ export class AddRootPopupComponent {
   myForm: FormGroup;
   validator: boolean = false;
   select: string = '1';
-  selectedItems: string[] = [];
+  selectedItems: KeyUsage[] = [];
   message: string = '';
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -36,29 +43,53 @@ export class AddRootPopupComponent {
     this.dialogRef.close();
   }
   submitForm() {
+    console.log(this.selectedItems);
     if (this.myForm.valid) {
+      var extensions: Extensions = {
+        keyUsages: this.selectedItems
+      }
+      var certificate: Certificate = {
+        commonName: this.myForm.value.commonName,
+        organization: this.myForm.value.organization,
+        email: this.myForm.value.email,
+        country: this.myForm.value.country,
+        certificateType: CertificateType.ROOT,
+        certificateRequestStatus: CertificateRequestStatus.PENDING,
+        extensionsDTO: extensions
+      }
+      console.log("OVO: ", certificate);
+      this.certificatesService.addRootCertificate(certificate).subscribe({
+        next: (result: Certificate) => {
+          console.log(result);
+          this.closeDialog();
+          window.location.reload();
+        },
+        error: (error) => {
+          console.error("Error :", error);
+        }
+      });
     } else {
       this.message = 'You did not fill in all the information';
     }
   }
 
   checkboxItems = [
-    { name: 'ENCIPHER ONLY', checked: false },
-    { name: 'CRL SIGN', checked: false },
-    { name: 'KEY CERT SIGN', checked: false },
-    { name: 'KEY AGREEMENT', checked: false },
-    { name: 'DATA ENCIPHERMENT', checked: false },
-    { name: 'KEY ENCIPHERMENT', checked: false },
-    { name: 'NON REPUDIATION', checked: false },
-    { name: 'DIGITAL SIGNATURE', checked: false },
-    { name: 'DECIPHER ONLY', checked: false },
+    { name: KeyUsage.ENCIPHER_ONLY, checked: false },
+    { name: KeyUsage.CRL_SIGN, checked: false },
+    { name: KeyUsage.KEY_CERT_SIGN, checked: false },
+    { name: KeyUsage.KEY_AGREEMENT, checked: false },
+    { name: KeyUsage.DATA_ENCIPHERMENT, checked: false },
+    { name: KeyUsage.KEY_ENCIPHERMENT, checked: false },
+    { name: KeyUsage.NON_REPUDIATION, checked: false },
+    { name: KeyUsage.DIGITAL_SIGNATURE, checked: false },
+    { name: KeyUsage.DECIPHER_ONLY, checked: false },
   ];
 
   onCheckboxChange(event: any, item: any) {
     if (event.target.checked) {
-      this.selectedItems.push(item);
+      this.selectedItems.push(item.name);
     } else {
-      const index = this.selectedItems.indexOf(item);
+      const index = this.selectedItems.indexOf(item.name);
       if (index !== -1) {
         this.selectedItems.splice(index, 1);
       }

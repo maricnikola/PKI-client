@@ -5,4 +5,6 @@ export interface Tree {
   alias?: string;
   certificateType?: CertificateType;
   children?: Tree[];
+  startDate?: Date;
+  endDate?: Date;
 }
