@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import { PrimeIcons, TreeNode } from 'primeng/api';
 import {
   Certificate,
@@ -22,6 +22,7 @@ export class CertificatesViewComponent implements OnInit {
   ngOnInit() {
     // this.nodeService.getFiles().then((data) => (this.files = data));
     this.files = this.data;
+    this.selectedFiles = null;
     this.getData();
   }
   expandAll() {
@@ -57,14 +58,58 @@ export class CertificatesViewComponent implements OnInit {
     });
   }
 
+  // mapTreeToData(treeData: Tree[]): any[] {
+  //   return treeData.map(node => {
+  //     const parsedData = this.parseInputString(node.subject);
+  //     console.log(parsedData);
+  //
+  //     return {
+  //       // commonName: parsedData.commonName || '',
+  //       // organization: parsedData.organization || '',
+  //       // email: parsedData.email || '',
+  //       // country: parsedData.country || '',
+  //       // certificateType: parsedData.certificateType || '',
+  //       label: node.subject,
+  //       icon: node.certificateType ? this.getIconFromCertificateType(node.certificateType) : '',
+  //       children: node.children ? this.mapTreeToData(node.children) : null,
+  //     };
+  //   });
+  // }
+  parseInputString(inputString: string | undefined): any {
+    if (!inputString) {
+      return {}; // Ako inputString nije definiran, vraćamo prazan objekt
+    }
+
+    const keyValuePairs = inputString.split(','); // Prvo parsiranje po zarezima
+    const parsedData: any = {};
+
+    keyValuePairs.forEach(pair => {
+      const [key, value] = pair.split('='); // Zatim parsiranje po jednakostima
+      if (key && value) { // Provjera da li su key i value definirani
+        parsedData[key.trim()] = value.trim();
+      }
+    });
+
+    return parsedData;
+  }
+
+
+
   mapTreeToData(treeData: Tree[]): any[] {
-    return treeData.map((node) => ({
-      label: node.subject,
-      icon: node.certificateType
-        ? this.getIconFromCertificateType(node.certificateType)
-        : '',
-      children: node.children ? this.mapTreeToData(node.children) : null,
-    }));
+    return treeData.map(node => {
+      const parsedData = this.parseInputString(node.subject);
+
+      return {
+        commonName: parsedData.commonName || '',
+        organization: parsedData.organization || '',
+        email: parsedData.email || '',
+        country: parsedData.country || '',
+        certificateType: parsedData.certificateType || '',
+        label: parsedData.commonName || '',
+        icon: node.certificateType ? this.getIconFromCertificateType(node.certificateType) : '',
+        children: node.children ? this.mapTreeToData(node.children) : null,
+      };
+    });
   }
 
   getIconFromCertificateType(certificateType: CertificateType): any {
@@ -74,6 +119,17 @@ export class CertificatesViewComponent implements OnInit {
       return PrimeIcons.ID_CARD;
     } else if (certificateType === CertificateType.END_ENTITY) {
       return PrimeIcons.IMAGE;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+
+    const treeElement = document.querySelector('.p-tree');
+
+    if (!treeElement?.contains(clickedElement)) {
+      this.selectedFiles = null;
     }
   }
 }
