@@ -1,0 +1,59 @@
+<div class="main-container">
+  <div class="title-closebtn">
+    <h4>Add certificates</h4>
+    <img
+      id="red-flag"
+      src="../../../assets/images/close.png"
+      (click)="closeDialog()"
+    />
+  </div>
+  <form [formGroup]="myForm">
+    <div class="colum">
+      <label for="commonName">Common Name:</label>
+      <input type="text" id="commonName" formControlName="commonName" />
+    </div>
+    <div class="colum">
+      <label for="organization">Organization:</label>
+      <input type="text" id="organization" formControlName="organization" />
+    </div>
+
+    <div class="colum">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" />
+    </div>
+
+    <div class="colum">
+      <label for="country">Country:</label>
+      <input type="text" id="country" formControlName="country" />
+    </div>
+    <mat-radio-group
+      class=".radio"
+      aria-label="Select an option"
+      formControlName="selectedGenerateType"
+      (change)="onGenerateTypeChange($event)"
+    >
+      <mat-radio-button value="1">INTERMEDIATE</mat-radio-button>
+      <mat-radio-button value="2">END ENTITY</mat-radio-button>
+    </mat-radio-group>
+    <label> <b>EXTENSIONS: </b></label>
+
+    <div *ngIf="select === '2'" class="input-container">
+      <div class="colum">
+        <label for="SAN">Subject Alternative Name:</label>
+        <input type="text" id="SAN" formControlName="SAN" />
+      </div>
+    </div>
+    <div *ngFor="let item of checkboxItems">
+      <label>
+        <input
+          type="checkbox"
+          [checked]="item.checked"
+          (change)="onCheckboxChange($event, item)"
+        />
+        {{ item.name }}
+      </label>
+    </div>
+    <label class="error">{{ message }}</label>
+  </form>
+  <button type="submit" (click)="submitForm()">Submit</button>
+</div>
