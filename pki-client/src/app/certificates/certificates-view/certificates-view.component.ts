@@ -35,6 +35,12 @@ export class CertificatesViewComponent implements OnInit {
       this.expandRecursive(node, false);
     });
   }
+  add() {
+    console.log(this.selectedFiles);
+  }
+  delete() {
+    console.log(this.selectedFiles);
+  }
 
   private expandRecursive(node: TreeNode, isExpand: boolean) {
     node.expanded = isExpand;
@@ -64,6 +70,7 @@ export class CertificatesViewComponent implements OnInit {
         ? this.getIconFromCertificateType(node.certificateType)
         : '',
       children: node.children ? this.mapTreeToData(node.children) : null,
+      alias: node.alias,
     }));
   }
 
