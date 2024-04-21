@@ -1,73 +1,28 @@
-import {Component, OnInit} from '@angular/core';
-import {PrimeIcons, TreeNode} from "primeng/api";
+import { Component, OnInit } from '@angular/core';
+import { PrimeIcons, TreeNode } from 'primeng/api';
+import {
+  Certificate,
+  CertificateType,
+} from '../models/certificate-request-model';
+import { MatTableDataSource } from '@angular/material/table';
+import { CertificatesService } from '../services/certificates.service';
+import { Tree } from '../models/tree-model';
 
 @Component({
   selector: 'app-certificates-view',
   templateUrl: './certificates-view.component.html',
-  styleUrls: ['./certificates-view.component.css']
+  styleUrls: ['./certificates-view.component.css'],
 })
-
-export class CertificatesViewComponent implements OnInit{
+export class CertificatesViewComponent implements OnInit {
   files!: TreeNode[];
   selectedFiles!: any;
 
-  // constructor(private nodeService: NodeService) {}
-  constructor() {}
-  data = [
-      {
-        label: 'Folder 1',
-        icon: PrimeIcons.SERVER,
-        children: [
-          {
-            label: 'Subfolder 1.1',
-            icon: PrimeIcons.ID_CARD,
-          },
-          {
-            label: 'Subfolder 1.2',
-            icon: PrimeIcons.ID_CARD,
-            children: [
-              {
-                label: 'Subsubfolder 1.2.1',
-                icon: PrimeIcons.IMAGE,
-              },
-              {
-                label: 'Subsubfolder 1.2.2',
-                icon: PrimeIcons.IMAGE,
-              }
-            ]
-          },
-          {
-            label: 'Subfolder 1.3',
-            icon: PrimeIcons.ID_CARD,
-          }
-        ]
-      },
-{
-  label: 'Folder 2',
-  icon: PrimeIcons.SERVER,
-  children: [
-    {
-      label: 'Subfolder 2.1',
-      icon: PrimeIcons.ID_CARD,
-    },
-    {
-      label: 'Subfolder 2.2',
-      icon: PrimeIcons.ID_CARD,
-    },
-    {
-      label: 'Subfolder 2.3',
-      icon: PrimeIcons.ID_CARD,
-    }
-  ]
-},
-{
-  label: 'Folder 3',
-  icon: PrimeIcons.SERVER,
-}
-];
+  constructor(private certificatesService: CertificatesService) {}
+  data = [];
   ngOnInit() {
     // this.nodeService.getFiles().then((data) => (this.files = data));
     this.files = this.data;
+    this.getData();
   }
   expandAll() {
     this.files.forEach((node) => {
@@ -87,6 +42,38 @@ export class CertificatesViewComponent implements OnInit{
       node.children.forEach((childNode) => {
         this.expandRecursive(childNode, isExpand);
       });
+    }
+  }
+
+  getData(): void {
+    this.certificatesService.getTree().subscribe({
+      next: (data: Tree[]) => {
+        this.files = this.mapTreeToData(data);
+        console.log(data);
+      },
+      error: () => {
+        console.log('Error!');
+      },
+    });
+  }
+
+  mapTreeToData(treeData: Tree[]): any[] {
+    return treeData.map((node) => ({
+      label: node.subject,
+      icon: node.certificateType
+        ? this.getIconFromCertificateType(node.certificateType)
+        : '',
+      children: node.children ? this.mapTreeToData(node.children) : null,
+    }));
+  }
+
+  getIconFromCertificateType(certificateType: CertificateType): any {
+    if (certificateType === CertificateType.ROOT) {
+      return PrimeIcons.SERVER;
+    } else if (certificateType === CertificateType.INTERMEDIATE) {
+      return PrimeIcons.ID_CARD;
+    } else if (certificateType === CertificateType.END_ENTITY) {
+      return PrimeIcons.IMAGE;
     }
   }
 }

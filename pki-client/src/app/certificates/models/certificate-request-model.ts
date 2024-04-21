@@ -18,5 +18,6 @@ export enum CertificateRequestStatus {
 export enum CertificateType {
   END_ENTITY = 'END_ENTITY',
   INTERMEDIATE = 'INTERMEDIATE',
-  HTTPS = 'HTTPS'
+  HTTPS = 'HTTPS',
+  ROOT = 'ROOT'
 }
