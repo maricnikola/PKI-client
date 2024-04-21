@@ -104,4 +104,14 @@ button:hover {
   width: 110px; /* Postavite željenu širinu */
   height: 40px; /* Postavite željenu visinu */
 }
-
+.bold-text {
+  font-weight: bold;
+}
+.field {
+  margin-bottom: 7px; /* Dodaj razmak ispod svakog polja */
+}
+.details-title {
+  font-size: 20px; /* Promijeni veličinu fonta */
+  text-align: center; /* Poravnaj naslov na sredinu */
+  margin-bottom: 15px;
+}
