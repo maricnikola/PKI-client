@@ -3,19 +3,57 @@
     <div class="title">
       <h3>Certificates</h3>
     </div>
-    <div class="flex flex-column">
-      <div class="mb-3">
-        <button pButton type="button" label="Expand all" (click)="expandAll()"></button>
-        <button pButton type="button" label="Collapse all" (click)="collapseAll()"></button>
+    <div class="button-container w-70">
+      <div class="left-buttons">
+        <button
+          pButton
+          type="button"
+          label="Expand all"
+          (click)="expandAll()"
+          class="custom-button"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Collapse all"
+          (click)="collapseAll()"
+          class="custom-button"
+        ></button>
       </div>
-      <p-tree [value]="files" selectionMode="checkbox" class="w-full md:w-30rem" [(selection)]="selectedFiles"></p-tree>
+      <div class="right-buttons">
+        <button
+          pButton
+          type="button"
+          label="Add"
+          class="custom-button"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Delete"
+          class="custom-button"
+        ></button>
+      </div>
     </div>
-<!--    <div class="mb-3">-->
-<!--      <button pButton type="button" label="Expand all" (click)="expandAll()" class="mr-2"></button>-->
-<!--      <button pButton type="button" label="Collapse all" (click)="collapseAll()"></button>-->
-<!--    </div>-->
-<!--    <div class="card flex flex-column align-items-center justify-content-center">-->
-<!--      <p-tree [value]="files" selectionMode="checkbox" class="w-full md:w-30rem" [(selection)]="selectedFiles"></p-tree>-->
-<!--    </div>-->
+    <div class="flex flex-row">
+      <div class="left-panel w-70">
+        <div class="mb-3"></div>
+        <p-tree
+          [value]="files"
+          class="w-full md:w-30rem"
+          selectionMode="single"
+          [(selection)]="selectedFiles"
+        ></p-tree>
+      </div>
+      <div class="details w-30" *ngIf="selectedFiles">
+        <div class="details-content">
+          <div class="details-title">Detalji:</div>
+          <div>{{ selectedFiles?.label }}</div>
+          <div class="details-description">
+            Ovdje ide malo teksta za opis...
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
