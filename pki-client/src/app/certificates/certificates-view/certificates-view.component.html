@@ -44,18 +44,23 @@
           [value]="files"
           class="w-full md:w-30rem"
           selectionMode="single"
-          [(selection)]="selectedFiles"
-        ></p-tree>
+          [(selection)]="selectedFiles">
+          <ng-template let-node pTemplate="default">
+            {{ node.commonName }}
+          </ng-template>
+        </p-tree>
       </div>
       <div class="details w-30" *ngIf="selectedFiles">
         <div class="details-content">
-          <div class="details-title">Detalji:</div>
-          <div>{{ selectedFiles?.label }}</div>
-          <div class="details-description">
-            Ovdje ide malo teksta za opis...
-          </div>
+          <div class="details-title">Details about certificate:</div>
+          <div class="field"><strong>commonName:</strong> {{ selectedFiles?.commonName }}</div>
+          <div class="field"><strong>organization:</strong> {{ selectedFiles?.organization }}</div>
+          <div class="field"><strong>email:</strong> {{ selectedFiles?.email }}</div>
+          <div class="field"><strong>country:</strong> {{ selectedFiles?.country }}</div>
+          <div class="field"><strong>certificateType:</strong> {{ selectedFiles?.certificateType }}</div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
