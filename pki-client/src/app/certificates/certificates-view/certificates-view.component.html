@@ -1,0 +1,64 @@
+<div class="main-container">
+  <div class="main">
+    <div class="title">
+      <h3>Certificates</h3>
+    </div>
+    <div class="button-container w-70">
+      <div class="left-buttons">
+        <button
+          pButton
+          type="button"
+          label="Expand all"
+          (click)="expandAll()"
+          class="custom-button"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Collapse all"
+          (click)="collapseAll()"
+          class="custom-button"
+        ></button>
+      </div>
+      <div class="right-buttons">
+        <button
+          pButton
+          type="button"
+          label="Add"
+          class="custom-button"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Delete"
+          class="custom-button"
+        ></button>
+      </div>
+    </div>
+    <div class="flex flex-row">
+      <div class="left-panel w-70">
+        <div class="mb-3"></div>
+        <p-tree
+          [value]="files"
+          class="w-full md:w-30rem"
+          selectionMode="single"
+          [(selection)]="selectedFiles">
+          <ng-template let-node pTemplate="default">
+            {{ node.commonName }}
+          </ng-template>
+        </p-tree>
+      </div>
+      <div class="details w-30" *ngIf="selectedFiles">
+        <div class="details-content">
+          <div class="details-title">Details about certificate:</div>
+          <div class="field"><strong>commonName:</strong> {{ selectedFiles?.commonName }}</div>
+          <div class="field"><strong>organization:</strong> {{ selectedFiles?.organization }}</div>
+          <div class="field"><strong>email:</strong> {{ selectedFiles?.email }}</div>
+          <div class="field"><strong>country:</strong> {{ selectedFiles?.country }}</div>
+          <div class="field"><strong>certificateType:</strong> {{ selectedFiles?.certificateType }}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

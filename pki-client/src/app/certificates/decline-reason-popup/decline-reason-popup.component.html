@@ -1,0 +1,15 @@
+<div class="main-container">
+  <div class="title-closebtn">
+    <h4>Decline</h4>
+    <img id="red-flag" src="../../../assets/images/close.png" (click)="closeDialog()">
+  </div>
+  <div class="textarea-conatiner">
+    <p>The reason why are you declining request: </p>
+    <textarea [(ngModel)]="declineReason" placeholder="At least 10 characters"></textarea>
+    <p id="validator" *ngIf="validator == true">*You must enter at least 10 characters</p>
+  </div>
+  <button (click)="declineCertificateRequest()">
+    Decline
+  </button>
+</div>
+

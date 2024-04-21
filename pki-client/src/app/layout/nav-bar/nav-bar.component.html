@@ -1,0 +1,10 @@
+<mat-toolbar>
+  <img src="../../../assets/images/logo.png" alt="image">
+  <div>
+    <div class="nav-bar-container">
+      <a  *ngIf="isHomeRoute" [routerLink]="['/certificate-requests']">CERTIFICATE REQUESTS</a>
+      <a  *ngIf="!isHomeRoute" [routerLink]="['/home']">CERTIFICATES VIEW</a>
+    </div>
+    <a *ngIf="role != null" (click)="logOut()" >LOGOUT</a>
+  </div>
+</mat-toolbar>

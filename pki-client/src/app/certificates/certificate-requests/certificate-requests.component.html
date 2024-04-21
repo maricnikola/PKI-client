@@ -1,0 +1,55 @@
+<app-nav-bar></app-nav-bar>
+<div class="main-container">
+  <div class="main">
+    <div class="title">
+      <h3>Certificate requests</h3>
+    </div>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="mat-table">
+
+        <!-- Common Name Column -->
+        <ng-container matColumnDef="commonName">
+          <th mat-header-cell *matHeaderCellDef> Common Name </th>
+          <td mat-cell *matCellDef="let certificate"> {{certificate.commonName}} </td>
+        </ng-container>
+
+        <!-- Organization Column -->
+        <ng-container matColumnDef="organization">
+          <th mat-header-cell *matHeaderCellDef> Organization </th>
+          <td mat-cell *matCellDef="let certificate"> {{certificate.organization}} </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let certificate"> {{certificate.email}} </td>
+        </ng-container>
+
+        <!-- Country Column -->
+        <ng-container matColumnDef="country">
+          <th mat-header-cell *matHeaderCellDef> Country </th>
+          <td mat-cell *matCellDef="let certificate"> {{certificate.country}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let certificate" class="actions">
+            <button mat-button color="primary" class="color-primary" (click)="acceptCertificateRequests(certificate.id)">Accept</button>
+            <button mat-button color="warn" class="color-warn" (click)="openDialog(certificate.id)">Decline</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                     showFirstLastButtons
+                     aria-label="Select page of certificate requests" class="mat-paginator">
+      </mat-paginator>
+
+    </div>
+
+  </div>
+</div>
