@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { DeclineReasonPopupComponent } from './decline-reason-popup/decline-reason-popup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCertificatePopupComponent } from './add-certificate-popup/add-certificate-popup.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AddCertificatePopupComponent } from './add-certificate-popup/add-certif
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatRadioModule,
   ],
 })
 export class CertificatesModule {}

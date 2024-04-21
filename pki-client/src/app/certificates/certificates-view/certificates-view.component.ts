@@ -7,6 +7,8 @@ import {
 import { MatTableDataSource } from '@angular/material/table';
 import { CertificatesService } from '../services/certificates.service';
 import { Tree } from '../models/tree-model';
+import { AddCertificatePopupComponent } from '../add-certificate-popup/add-certificate-popup.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-certificates-view',
@@ -16,8 +18,12 @@ import { Tree } from '../models/tree-model';
 export class CertificatesViewComponent implements OnInit {
   files!: TreeNode[];
   selectedFiles!: any;
+  dialogRef!: MatDialogRef<AddCertificatePopupComponent>;
 
-  constructor(private certificatesService: CertificatesService) {}
+  constructor(
+    private certificatesService: CertificatesService,
+    private matDialog: MatDialog
+  ) {}
   data = [];
   ngOnInit() {
     // this.nodeService.getFiles().then((data) => (this.files = data));
@@ -35,8 +41,19 @@ export class CertificatesViewComponent implements OnInit {
       this.expandRecursive(node, false);
     });
   }
-  add() {
-    console.log(this.selectedFiles);
+  add(): void {
+    if (
+      this.selectedFiles.type === CertificateType.INTERMEDIATE ||
+      this.selectedFiles.type === CertificateType.ROOT
+    ) {
+      console.log(this.selectedFiles.type);
+      this.dialogRef = this.matDialog.open(AddCertificatePopupComponent, {
+        data: {},
+      });
+    } else {
+      //  TODO:  dijalog za Root, smisli kako da se proveri selectedFiles
+      console.log(this.selectedFiles);
+    }
   }
   delete() {
     console.log(this.selectedFiles);
@@ -71,6 +88,7 @@ export class CertificatesViewComponent implements OnInit {
         : '',
       children: node.children ? this.mapTreeToData(node.children) : null,
       alias: node.alias,
+      type: node.certificateType,
     }));
   }
 

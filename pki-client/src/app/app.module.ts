@@ -15,7 +15,7 @@ import { HomeModule } from './home/home.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MaterialModule } from './infrastructure/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -31,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    MatRadioModule,
   ],
   providers: [
     DatePipe,
