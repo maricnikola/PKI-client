@@ -12,6 +12,7 @@ import { DeclineReasonPopupComponent } from './decline-reason-popup/decline-reas
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCertificatePopupComponent } from './add-certificate-popup/add-certificate-popup.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { AddRootPopupComponent } from './add-root-popup/add-root-popup.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MatRadioModule } from '@angular/material/radio';
     CertificatesViewComponent,
     DeclineReasonPopupComponent,
     AddCertificatePopupComponent,
+    AddRootPopupComponent,
   ],
   exports: [CertificatesViewComponent],
   imports: [

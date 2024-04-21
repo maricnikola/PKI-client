@@ -101,17 +101,17 @@ button:hover {
   width: 70%;
 }
 .custom-button {
-  width: 110px; /* Postavite željenu širinu */
-  height: 40px; /* Postavite željenu visinu */
+  width: 110px;
+  height: 40px;
 }
 .bold-text {
   font-weight: bold;
 }
 .field {
-  margin-bottom: 7px; /* Dodaj razmak ispod svakog polja */
+  margin-bottom: 7px;
 }
 .details-title {
-  font-size: 20px; /* Promijeni veličinu fonta */
-  text-align: center; /* Poravnaj naslov na sredinu */
+  font-size: 20px;
+  text-align: center;
   margin-bottom: 15px;
 }

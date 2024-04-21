@@ -9,6 +9,7 @@ import { CertificatesService } from '../services/certificates.service';
 import { Tree } from '../models/tree-model';
 import { AddCertificatePopupComponent } from '../add-certificate-popup/add-certificate-popup.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {AddRootPopupComponent} from "../add-root-popup/add-root-popup.component";
 
 @Component({
   selector: 'app-certificates-view',
@@ -17,8 +18,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class CertificatesViewComponent implements OnInit {
   files!: TreeNode[];
-  selectedFiles!: any;
+  selectedFile!: any;
   dialogRef!: MatDialogRef<AddCertificatePopupComponent>;
+  dialogRootRef!: MatDialogRef<AddRootPopupComponent>;
 
   constructor(
     private certificatesService: CertificatesService,
@@ -28,7 +30,7 @@ export class CertificatesViewComponent implements OnInit {
   ngOnInit() {
     // this.nodeService.getFiles().then((data) => (this.files = data));
     this.files = this.data;
-    this.selectedFiles = null;
+    this.selectedFile = null;
     this.getData();
   }
   expandAll() {
@@ -43,21 +45,19 @@ export class CertificatesViewComponent implements OnInit {
     });
   }
   add(): void {
-    if (
-      this.selectedFiles.type === CertificateType.INTERMEDIATE ||
-      this.selectedFiles.type === CertificateType.ROOT
-    ) {
-      console.log(this.selectedFiles.type);
+    if(this.selectedFile == null){
+      this.dialogRootRef = this.matDialog.open(AddRootPopupComponent, {
+        data: {},
+      });
+    }
+    else  {
       this.dialogRef = this.matDialog.open(AddCertificatePopupComponent, {
         data: {},
       });
-    } else {
-      //  TODO:  dijalog za Root, smisli kako da se proveri selectedFiles
-      console.log(this.selectedFiles);
     }
   }
   delete() {
-    console.log(this.selectedFiles);
+    console.log(this.selectedFile);
   }
 
   private expandRecursive(node: TreeNode, isExpand: boolean) {
@@ -151,9 +151,12 @@ export class CertificatesViewComponent implements OnInit {
     const clickedElement = event.target as HTMLElement;
 
     const treeElement = document.querySelector('.p-tree');
+    const addButton = document.querySelector('.add-button');
+    const deleteButton = document.querySelector('.delete-button');
 
-    if (!treeElement?.contains(clickedElement)) {
-      this.selectedFiles = null;
+    if (!treeElement?.contains(clickedElement) && !addButton?.contains(clickedElement) && !deleteButton?.contains(clickedElement)) {
+      this.selectedFile = null;
     }
   }
+
 }
