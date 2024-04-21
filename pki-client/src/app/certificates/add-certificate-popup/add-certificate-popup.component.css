@@ -71,12 +71,19 @@ button:hover {
 
 .colum {
   margin-top: 20px;
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 20px
 }
+
 input,
 .radio {
   margin-left: 20px;
 }
 
+.radio {
+  /*margin-bottom: 20px*/
+}
 form {
   display: flex;
   flex-direction: column;
@@ -86,3 +93,31 @@ form {
 .error {
   color: red;
 }
+
+.inputs {
+}
+
+.matButt {
+  margin-right: 15px;
+}
+
+.label {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+.checkboxWrap {
+  display: flex;
+  flex-wrap: wrap; /* Omogućava omotavanje elemenata u više redova */
+  justify-content: center; /* Centriraj elemente po horizontali */
+}
+
+.checkboxWrap label {
+  display: flex;
+  align-items: center; /* Centriraj tekst vertikalno */
+}
+
+.checkboxWrap label input[type="checkbox"] {
+  margin-right: 7px; /* Dodaj marginu samo na desnu stranu checkboxa */
+}
+
+
