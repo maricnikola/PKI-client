@@ -44,4 +44,9 @@ export class CertificatesService {
     return this.http.post<Certificate>(url, certificate);
   }
 
+  deleteCertificate(alias: String): Observable<any> {
+    const url = environment.apiPki + `certificates/delete/${alias}`;
+    return this.http.delete<any>(url,);
+  }
+
 }

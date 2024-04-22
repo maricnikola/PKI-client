@@ -73,7 +73,18 @@ export class CertificatesViewComponent implements OnInit {
     }
   }
   delete() {
-    console.log(this.selectedFile);
+    if(this.selectedFile == null) return;
+
+    this.certificatesService.deleteCertificate(this.selectedFile.alias).subscribe({
+      next:() => {
+        window.location.reload();
+        console.log("Obrisano!");
+      },
+      error: () => {
+        console.log("Gresla!");
+      }
+    })
+    console.log(this.selectedFile.alias);
   }
 
   private expandRecursive(node: TreeNode, isExpand: boolean) {
