@@ -25,14 +25,19 @@
           pButton
           type="button"
           label="Add"
-          class="custom-button"
+          class="custom-button add-button"
+          (click)="add()"
+          [disabled]="selectedFile?.certificateType === CertificateType.END_ENTITY"
+          [ngClass]="{ 'disabled': selectedFile?.certificateType === CertificateType.END_ENTITY }"
         ></button>
         <button
           pButton
           type="button"
           label="Delete"
-          class="custom-button"
+          class="custom-button delete-button"
+          (click)="delete()"
         ></button>
+
       </div>
     </div>
     <div class="flex flex-row">
@@ -42,23 +47,24 @@
           [value]="files"
           class="w-full md:w-30rem"
           selectionMode="single"
-          [(selection)]="selectedFiles">
+          [(selection)]="selectedFile">
           <ng-template let-node pTemplate="default">
             {{ node.commonName }}
           </ng-template>
         </p-tree>
       </div>
-      <div class="details w-30" *ngIf="selectedFiles">
+      <div class="details w-30" *ngIf="selectedFile">
         <div class="details-content">
           <div class="details-title">Details about certificate:</div>
-          <div class="field"><strong>commonName:</strong> {{ selectedFiles?.commonName }}</div>
-          <div class="field"><strong>organization:</strong> {{ selectedFiles?.organization }}</div>
-          <div class="field"><strong>email:</strong> {{ selectedFiles?.email }}</div>
-          <div class="field"><strong>country:</strong> {{ selectedFiles?.country }}</div>
-          <div class="field"><strong>certificateType:</strong> {{ selectedFiles?.certificateType }}</div>
+          <div class="field"><strong>Common name:</strong> {{ selectedFile?.commonName }}</div>
+          <div class="field"><strong>Organization:</strong> {{ selectedFile?.organization }}</div>
+          <div class="field"><strong>Email:</strong> {{ selectedFile?.email }}</div>
+          <div class="field"><strong>Country:</strong> {{ selectedFile?.country }}</div>
+          <div class="field"><strong>Certificate type:</strong> {{ selectedFile?.certificateType }}</div>
+          <div class="field"><strong>Start date: </strong> {{ selectedFile?.startDate }}</div>
+          <div class="field"><strong>End data: </strong> {{ selectedFile?.endDate }}</div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
